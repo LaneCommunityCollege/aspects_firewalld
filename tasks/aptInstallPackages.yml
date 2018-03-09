@@ -1,0 +1,78 @@
+---
+- name: apt - Install python-apt for use with Ansible apt modules.
+  apt:
+    pkg: python-apt
+    state: present
+    cache_valid_time: "14400"
+  tags:
+    - aspects_firewalld
+    - aspects_firewalld_package_install
+    - aspects_firewalld_package_install_apt
+
+- name: install Ubuntu 14.04 packages
+  when:
+    (
+      ansible_distribution == "Ubuntu" and
+      ansible_distribution_version == "14.04" and
+        (
+          item.value.state == "present" or
+          item.value.state == "latest"
+        ) and
+      item.value.Ubuntu is defined and
+      item.value.Ubuntu.1404 is defined
+    )
+  apt:
+    pkg: "{{ item.value.Ubuntu.1404 }}"
+    state: "{{ item.value.state }}"
+    cache_valid_time: "14400"
+  with_dict: "{{ aspects_firewalld_packages }}"
+  tags:
+    - aspects_firewalld
+    - aspects_firewalld_package_install
+    - aspects_firewalld_package_install_apt
+
+
+- name: install Ubuntu 16.04 packages
+  when:
+    (
+      ansible_distribution == "Ubuntu" and
+      ansible_distribution_version == "16.04" and
+        (
+          item.value.state == "present" or
+          item.value.state == "latest"
+        ) and
+      item.value.Ubuntu is defined and
+      item.value.Ubuntu.1604 is defined
+    )
+  apt:
+    pkg: "{{ item.value.Ubuntu.1604 }}"
+    state: "{{ item.value.state }}"
+    cache_valid_time: "14400"
+  with_dict: "{{ aspects_firewalld_packages }}"
+  tags:
+    - aspects_firewalld
+    - aspects_firewalld_package_install
+    - aspects_firewalld_package_install_apt
+
+
+- name: install Debian 9 packages
+  when:
+    (
+      ansible_distribution == "Debian" and
+      ansible_distribution_major_version == "9" and
+        (
+          item.value.state == "present" or
+          item.value.state == "latest"
+        ) and
+      item.value.Debian is defined and
+      item.value.Debian.9 is defined
+    )
+  apt:
+    pkg: "{{ item.value.Debian.9 }}"
+    state: "{{ item.value.state }}"
+    cache_valid_time: "14400"
+  with_dict: "{{ aspects_firewalld_packages }}"
+  tags:
+    - aspects_firewalld
+    - aspects_firewalld_package_install
+    - aspects_firewalld_package_install_apt

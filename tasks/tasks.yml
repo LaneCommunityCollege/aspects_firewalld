@@ -1,0 +1,34 @@
+---
+- name: "install firewalld packages"
+  include: "{{ ansible_pkg_mgr}}InstallPackages.yml"
+  tags:
+    - aspects_firewalld
+    - aspects_firewalld_package_install
+
+- name: "remove firewalld packages"
+  include: "{{ ansible_pkg_mgr}}RemovePackages.yml"
+  tags:
+    - aspects_firewalld
+    - aspects_firewalld_package_remove
+
+- name: "template zone files"
+  when: item.value.state == "present"
+  template:
+    src: "etc-firewalld-zones-zone.xml.j2"
+    dest: "/etc/firewalld/zones/{{ item.value.key }}.xml"
+  with_dict: "{{ aspects_firewalld_zones }}"
+  notify: restart firewalld
+  tags:
+  - aspects_firewalld
+  - aspects_firewalld_template_tasks
+
+- name: "remove unwanted zone files."
+  when: item.value.state == "absent"
+  file:
+    state: "absent"
+    name: "/etc/firewalld/zones/{{ item.value.key }}.xml"
+  with_dict: "{{ aspects_firewalld_zones }}"
+  notify: restart firewalld
+  tags:
+  - aspects_firewalld
+  - aspects_firewalld_template_tasks

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- {{ ansible_managed }} -->
+<zone
+  {% if item.value.zone_version is defined %}
+  version="{{ item.value.zone_version }}"
+  {% endif %}
+  {% if item.value.zone_target is defined %}
+  target="{{ item.value.zone_target }}"
+  {% endif %}
+>
+  {% if item.value.name is defined %}
+  <short>{{ item.value.name }}</short>
+  {% endif %}
+
+  {% if item.value.description is defined %}
+  <description>{{ item.value.description }}</description>
+  {% endif %}
+
+  {% if item.value.interfaces is defined %}
+  {% for interface in item.value.interfaces %}
+  {% if item.value.interfaces[interface].state == "enabled" %}
+  <interface name="{{ item.value.interfaces[interface].name }}"/>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+
+  {% if item.value.sources is defined %}
+  {% for subitem in item.value.sources %}
+  {% if item.value.sources[subitem].state == "enabled" %}
+  <source
+    {% if item.value.sources[subitem].address is defined %}
+    address="{{ item.value.sources[subitem].address }}"
+    {% endif %}
+    {% if item.value.sources[subitem].mac is defined %}
+    mac="{{ item.value.sources[subitem].mac }}"
+    {% endif %}
+    {% if item.value.sources[subitem].ipset is defined %}
+    ipset="{{ item.value.sources[subitem].ipset }}"
+    {% endif %}
+  />
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+
+  {% if item.value.services is defined %}
+  {% for service in item.value.services %}
+  {% if item.value.services[service].state == "enabled" %}
+  <service name="{{ item.value.services[service].name }}"/>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+
+  {% if item.value.ports is defined %}
+  {% for port in item.value.ports %}
+  {% if item.value.ports[port].state == "enabled" %}
+  <port protocol="{{ item.value.ports[port].protocol }}" port="{{ item.value.ports[port].name }}"/>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+
+  {% if item.value.protocols is defined %}
+  {% for subitem in item.value.protocols %}
+  {% if item.value.protocols[subitem].state == "enabled" %}
+  <protocol value="{{ item.value.protocols[subitem].value }}"/>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+
+  {% if item.value.icmp_blocks is defined %}
+  {% for subitem in item.value.icmp_blocks %}
+  {% if item.value.icmp_blocks[subitem].state == "enabled" %}
+  <icmp-block name="{{ item.value.icmp_blocks[subitem].name }}"/>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+
+  {% if item.value.icmp_block_inversion is defined %}
+  {% if item.value.icmp_block_inversion == "enabled" %}
+  <icmp-block-inversion/>
+  {% endif %}
+  {% endif %}
+
+  {% if item.value.masquerade is defined %}
+  {% if item.value.masquerade == "enabled" %}
+  <icmp-block-inversion/>
+  {% endif %}
+  {% endif %}
+
+  {% if item.value.forward_ports is defined %}
+  {% for subitem in item.value.forward_ports %}
+  {% if item.value.forward_ports[subitem].state == "enabled" %}
+  <forward_ports
+    port="{{ item.value.forward_ports[subitem].port }}"
+    protocol="{{ item.value.forward_ports[subitem].protocol }}"
+    {% if item.value.forward_ports[subitem].to_port is defined %}
+    to-port="{{ item.value.forward_ports[subitem].to_port }}"
+    {% endif %}
+    {% if item.value.forward_ports[subitem].to_addr is defined %}
+    to-addr="{{ item.value.forward_ports[subitem].to_addr }}"
+    {% endif %}
+  />
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+
+  {% if item.value.source_ports is defined %}
+  {% for subitem in item.value.source_ports %}
+  {% if item.value.source_ports[subitem].state == "enabled" %}
+  <source-port
+    port="{{ item.value.source_ports[subitem].port }}"
+    protocol="{{ item.value.source_ports[subitem].protocol }}"
+  />
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+
+  {% if item.value.rules is defined %}
+  {% for subitem in item.value.rules %}
+  {% if item.value.rules[subitem].state == "enabled" %}
+  {{ item.value.rules[subitem].value }}
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+
+</zone>

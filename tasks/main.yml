@@ -1,0 +1,6 @@
+---
+- name: Run tasks when role is enabled.
+  when: aspects_firewalld_enabled
+  import_tasks: tasks.yml
+  tags:
+  - aspects_firewalld

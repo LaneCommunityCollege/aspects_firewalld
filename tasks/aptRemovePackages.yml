@@ -1,0 +1,61 @@
+---
+- name: remove Ubuntu 14.04 packages
+  when:
+    - ansible_distribution == "Ubuntu"
+    - ansible_distribution_version == "14.04"
+    - item.value.state == "absent"
+    - item.value.Ubuntu is defined
+    - item.value.Ubuntu.1404 is defined
+  apt:
+    pkg: "{{ item.value.Ubuntu.1404 }}"
+    state: "{{ item.value.state }}"
+    cache_valid_time: "14400"
+  with_dict: "{{ aspects_firewalld_packages }}"
+  tags:
+    - aspects_firewalld
+    - aspects_firewalld_package_remove
+    - aspects_firewalld_package_remove_apt
+
+
+- name: remove Ubuntu 16.04 packages
+  when:
+    - ansible_distribution == "Ubuntu"
+    - ansible_distribution_version == "16.04"
+    - item.value.state == "absent"
+    - item.value.Ubuntu is defined
+    - item.value.Ubuntu.1604 is defined
+  apt:
+    pkg: "{{ item.value.Ubuntu.1604 }}"
+    state: "{{ item.value.state }}"
+    cache_valid_time: "14400"
+  with_dict: "{{ aspects_firewalld_packages }}"
+  tags:
+    - aspects_firewalld
+    - aspects_firewalld_package_remove
+    - aspects_firewalld_package_remove_apt
+
+
+- name: remove Debian 9 packages
+  when:
+    - ansible_distribution == "Debian"
+    - ansible_distribution_version == "9"
+    - item.value.state == "absent"
+    - item.value.Debian is defined
+    - item.value.Debian.9 is defined
+  apt:
+    pkg: "{{ item.value.Debian.9 }}"
+    state: "{{ item.value.state }}"
+    cache_valid_time: "14400"
+  with_dict: "{{ aspects_firewalld_packages }}"
+  tags:
+    - aspects_firewalld
+    - aspects_firewalld_package_remove
+    - aspects_firewalld_package_remove_apt
+
+- name: Remove dependencies that are no longer required
+  apt:
+    autoremove: yes
+  tags:
+    - aspects_firewalld
+    - aspects_firewalld_package_remove
+    - aspects_firewalld_package_remove_apt

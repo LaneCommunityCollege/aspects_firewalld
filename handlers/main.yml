@@ -1,0 +1,31 @@
+---
+- name: restart firewalld
+  service:
+    name: firewalld
+    state: restarted
+    enabled: yes
+  tags:
+  - aspects_firewalld
+
+- name: reload firewalld
+  service:
+    name: firewalld
+    state: reloaded
+    enabled: yes
+  tags:
+  - aspects_firewalld
+
+- name: start firewalld
+  service:
+    name: firewalld
+    state: started
+    enabled: yes
+  tags:
+  - aspects_firewalld
+
+- name: stop firewalld
+  service:
+    name: firewalld
+    state: stopped
+  tags:
+  - aspects_firewalld

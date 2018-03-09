@@ -1,0 +1,22 @@
+---
+galaxy_info:
+  author: David Reagan <reagand@lanecc.edu>
+  description: Install or remove firewalld and configure firewalld zones.
+  company: Lane Community College
+  license: MIT
+  min_ansible_version: 2.4
+  platforms:
+  - name: CentOS
+    versions:
+    - 7
+  - name: Ubuntu
+    versions:
+    - trusty
+    - xenial
+  - name: Debian
+    versions:
+    - stretch
+  categories:
+  - system
+dependencies: []
+  
