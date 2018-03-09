@@ -30,7 +30,7 @@ aspects_firewalld_packages:
 ```
 Set ```state``` to "default" if you wish to list a package but not install it.
 
-Check the [tasks/aptInstallpackages.yml](aptInstallpackages.yml) or [tasks/yumInstallPackages.yml](yumInstallPackages.yml) files to find out what values are accepted for the ```ansible_distribution_*``` variables.
+Check the [tasks/aptInstallpackages.yml](tasks/aptInstallpackages.yml) or [tasks/yumInstallPackages.yml](tasks/yumInstallPackages.yml) files to find out what values are accepted for the ```ansible_distribution_*``` variables.
 
 ### aspects_firewalld_zones
 A dictionary/hash of the firewalld rules to configure in the zone files.
@@ -68,7 +68,7 @@ aspects_firewalld_zones:
 
 ```
 
-Use the [http://www.firewalld.org/documentation/man-pages/firewalld.zone.html](firewalld.org documentation) on zone files to find the available tags, as well as how to use rich rules.
+Use the [firewalld.org documentation](http://www.firewalld.org/documentation/man-pages/firewalld.zone.html) on zone files to find the available tags, as well as how to use rich rules.
 
 
 # Example Playbook
