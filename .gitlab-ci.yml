@@ -1,0 +1,22 @@
+---
+stages:
+  - deploy_master
+
+job_deploy_master:
+  stage: deploy_master
+  only:
+    - master
+  script:
+    - sudo /bin/chown -R gitlab-runner:gitlab-runner /etc/ansible/roles/aspects_firewalld
+    - |
+      rsync \
+        --progress \
+        --delete \
+        -avz \
+        --exclude=".git/" \
+        --exclude=".gitignore" \
+        --exclude=".gitlab-ci.yml" \
+        $(pwd)/ /etc/ansible/roles/aspects_firewalld
+    - sudo /bin/chown -R ansibleagent:ansibleagent /etc/ansible/roles/aspects_firewalld
+  tags:
+    - deploy_aspects_master
