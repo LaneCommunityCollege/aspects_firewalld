@@ -53,7 +53,7 @@
   {% if item.value.ports is defined %}
   {% for port in item.value.ports %}
   {% if item.value.ports[port].state == "enabled" %}
-  <port protocol="{{ item.value.ports[port].protocol }}" port="{{ item.value.ports[port].name }}"/>
+  <port protocol="{{ item.value.ports[port].protocol }}" port="{{ item.value.ports[port].port }}"/>
   {% endif %}
   {% endfor %}
   {% endif %}
