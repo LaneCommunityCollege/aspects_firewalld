@@ -17,7 +17,7 @@
     src: "etc-firewalld-zones-zone.xml.j2"
     dest: "/etc/firewalld/zones/{{ item.value.key }}.xml"
   with_dict: "{{ aspects_firewalld_zones }}"
-  notify: restart firewalld
+#  notify: restart firewalld
   tags:
   - aspects_firewalld
   - aspects_firewalld_template_tasks
@@ -28,7 +28,7 @@
     state: "absent"
     name: "/etc/firewalld/zones/{{ item.value.key }}.xml"
   with_dict: "{{ aspects_firewalld_zones }}"
-  notify: restart firewalld
+#  notify: restart firewalld
   tags:
   - aspects_firewalld
   - aspects_firewalld_template_tasks
