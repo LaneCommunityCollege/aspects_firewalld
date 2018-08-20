@@ -3,11 +3,11 @@ Install or remove firewalld and configure firewalld zones.
 
 This role templates the `/etc/firewalld/zones/<zone>.xml` files in order to apply the configuration.
 
-# Requirements
+## Requirements
 
 Set ```hash_behaviour=merge``` in your ansible.cfg file.
 
-# Role Variables
+## Role Variables
 ### aspects_firewalld_enabled
 
 Default is ```False```.
@@ -15,22 +15,6 @@ Default is ```False```.
 Set to ```True``` to run tasks in this role.
 
 Set to ```False``` to block all tasks in this role from running.
-
-### aspects_firewalld_packages
-A dictionary/hash of packages to install.
-
-Use this pattern:
-
-```yaml
-aspects_firewalld_packages:
-  <package key>:
-    state: "<present or latest>"
-    <ansible_distribution>:
-      <ansible_distribution_version or ansible_distribution_major_version>: "<package name>"
-```
-Set ```state``` to "default" if you wish to list a package but not install it.
-
-Check the [tasks/aptInstallpackages.yml](tasks/aptInstallpackages.yml) or [tasks/yumInstallPackages.yml](tasks/yumInstallPackages.yml) files to find out what values are accepted for the ```ansible_distribution_*``` variables.
 
 ### aspects_firewalld_zones
 A dictionary/hash of the firewalld rules to configure in the zone files.
@@ -70,13 +54,18 @@ aspects_firewalld_zones:
 
 Use the [firewalld.org documentation](http://www.firewalld.org/documentation/man-pages/firewalld.zone.html) on zone files to find the available tags, as well as how to use rich rules.
 
+## Dependencies
+### aspects_packages
+[aspects_packages](https://github.com/LaneCommunityCollege/aspects_packages) is used to manage system packages.
 
-# Example Playbook
+
+## Example Playbook
 
 ```yaml
 - hosts:
   - all
   vars:
+    aspects_packages_enabled: True
     aspects_firewalld_enabled: True
     aspects_firewalld_zones:
       public:
@@ -101,11 +90,11 @@ Use the [firewalld.org documentation](http://www.firewalld.org/documentation/man
         ports:
           port80:
             state: "enabled"
-            name: "80"
+            port: "80"
             protocol: "tcp"
           port8021duplicati:
             state: "enabled"
-            name: "8021"
+            port: "8021"
             protocol: "tcp"
         protocols:
           vmtp:
@@ -130,11 +119,11 @@ Use the [firewalld.org documentation](http://www.firewalld.org/documentation/man
         ports:
           port80:
             state: "disabled"
-            name: "80"
+            port: "80"
             protocol: "tcp"
           port8021duplicati:
             state: "enabled"
-            name: "8021"
+            port: "8021"
             protocol: "tcp"
         protocols:
           vmtp:
@@ -144,6 +133,6 @@ Use the [firewalld.org documentation](http://www.firewalld.org/documentation/man
   - aspects_firewalld
 ```
 
-# License
+## License
 
 MIT

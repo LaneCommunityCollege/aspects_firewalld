@@ -1,16 +1,4 @@
 ---
-- name: "install firewalld packages"
-  include: "{{ ansible_pkg_mgr}}InstallPackages.yml"
-  tags:
-    - aspects_firewalld
-    - aspects_firewalld_package_install
-
-- name: "remove firewalld packages"
-  include: "{{ ansible_pkg_mgr}}RemovePackages.yml"
-  tags:
-    - aspects_firewalld
-    - aspects_firewalld_package_remove
-
 - name: "template zone files"
   when: item.value.state == "present"
   template:

@@ -9,14 +9,19 @@ galaxy_info:
   - name: CentOS
     versions:
     - 7
+  - name: OracleLinux
+    versions:
+    - 7
   - name: Ubuntu
     versions:
     - trusty
     - xenial
+    - bionic
   - name: Debian
     versions:
     - stretch
   categories:
   - system
-dependencies: []
+dependencies:
+- { role: aspects_packages, when: aspects_packages_enabled }
   

@@ -1,12 +1,16 @@
 ---
 aspects_firewalld_enabled: False
-aspects_firewalld_packages:
+aspects_packages_packages:
   firewalld:
     state: "present"
     Ubuntu:
       1404: "firewalld"
       1604: "firewalld"
+      1804: "firewalld"
     Debian:
       9: "firewalld"
     CentOS:
       7: "firewalld"
+    OracleLinux:
+      7: "firewalld"
+      6: "firewalld"
