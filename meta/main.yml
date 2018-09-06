@@ -23,5 +23,5 @@ galaxy_info:
   categories:
   - system
 dependencies:
-- { role: aspects_packages, when: aspects_packages_enabled }
+- { role: aspects_packages, when: aspects_packages_enabled and aspects_firewalld_enabled }
   
