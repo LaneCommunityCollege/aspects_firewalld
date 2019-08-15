@@ -4,7 +4,6 @@ aspects_packages_packages:
   firewalld:
     state: "present"
     Ubuntu:
-      1404: "firewalld"
       1604: "firewalld"
       1804: "firewalld"
     Debian:
@@ -13,4 +12,3 @@ aspects_packages_packages:
       7: "firewalld"
     OracleLinux:
       7: "firewalld"
-      6: "firewalld"
