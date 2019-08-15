@@ -4,7 +4,7 @@
   template:
     src: "etc-firewalld-zones-zone.xml.j2"
     dest: "/etc/firewalld/zones/{{ item.value.key }}.xml"
-  with_dict: "{{ aspects_firewalld_zones }}"
+  loop: "{{ aspects_firewalld_zones|dict2items }}"
   notify: restart firewalld
   tags:
   - aspects_firewalld
@@ -15,7 +15,7 @@
   file:
     state: "absent"
     name: "/etc/firewalld/zones/{{ item.value.key }}.xml"
-  with_dict: "{{ aspects_firewalld_zones }}"
+  loop: "{{ aspects_firewalld_zones|dict2items }}"
   notify: restart firewalld
   tags:
   - aspects_firewalld
