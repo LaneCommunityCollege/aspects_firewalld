@@ -89,7 +89,7 @@
   {% if item.value.forward_ports is defined %}
   {% for subitem in item.value.forward_ports %}
   {% if item.value.forward_ports[subitem].state == "enabled" %}
-  <forward_ports
+  <forward-port
     port="{{ item.value.forward_ports[subitem].port }}"
     protocol="{{ item.value.forward_ports[subitem].protocol }}"
     {% if item.value.forward_ports[subitem].to_port is defined %}

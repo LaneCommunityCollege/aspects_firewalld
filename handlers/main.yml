@@ -4,6 +4,7 @@
     name: firewalld
     state: restarted
     enabled: yes
+  register: aspects_firewalld_service_restarted
   tags:
   - aspects_firewalld
 
@@ -12,6 +13,7 @@
     name: firewalld
     state: reloaded
     enabled: yes
+  register: aspects_firewalld_service_reloaded
   tags:
   - aspects_firewalld
 
@@ -20,6 +22,7 @@
     name: firewalld
     state: started
     enabled: yes
+  register: aspects_firewalld_service_started
   tags:
   - aspects_firewalld
 
@@ -27,5 +30,6 @@
   service:
     name: firewalld
     state: stopped
+  register: aspects_firewalld_service_stopped
   tags:
   - aspects_firewalld
