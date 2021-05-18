@@ -1,123 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- {{ ansible_managed }} -->
 <zone
-  {% if item.value.zone_version is defined %}
-  version="{{ item.value.zone_version }}"
+  {% if item.1.zone_version is defined %}
+  version="{{ item.1.zone_version }}"
   {% endif %}
-  {% if item.value.zone_target is defined %}
-  target="{{ item.value.zone_target }}"
+  {% if item.1.zone_target is defined %}
+  target="{{ item.1.zone_target }}"
   {% endif %}
 >
-  {% if item.value.name is defined %}
-  <short>{{ item.value.name }}</short>
+  {% if item.1.name is defined %}
+  <short>{{ item.1.name }}</short>
   {% endif %}
 
-  {% if item.value.description is defined %}
-  <description>{{ item.value.description }}</description>
+  {% if item.1.description is defined %}
+  <description>{{ item.1.description }}</description>
   {% endif %}
 
-  {% if item.value.interfaces is defined %}
-  {% for interface in item.value.interfaces %}
-  {% if item.value.interfaces[interface].state == "enabled" %}
-  <interface name="{{ item.value.interfaces[interface].name }}"/>
+  {% if item.1.interfaces is defined %}
+  {% for interface in item.1.interfaces | dictsort %}
+  {% if interface.1.state == "enabled" %}
+  <interface name="{{ interface.1.name }}"/>
   {% endif %}
   {% endfor %}
   {% endif %}
 
-  {% if item.value.sources is defined %}
-  {% for subitem in item.value.sources %}
-  {% if item.value.sources[subitem].state == "enabled" %}
+  {% if item.1.sources is defined %}
+  {% for subitem in item.1.sources | dictsort %}
+  {% if subitem.1.state == "enabled" %}
   <source
-    {% if item.value.sources[subitem].address is defined %}
-    address="{{ item.value.sources[subitem].address }}"
+    {% if subitem.1.address is defined %}
+    address="{{ subitem.1.address }}"
     {% endif %}
-    {% if item.value.sources[subitem].mac is defined %}
-    mac="{{ item.value.sources[subitem].mac }}"
+    {% if subitem.1.mac is defined %}
+    mac="{{ subitem.1.mac }}"
     {% endif %}
-    {% if item.value.sources[subitem].ipset is defined %}
-    ipset="{{ item.value.sources[subitem].ipset }}"
+    {% if subitem.1.ipset is defined %}
+    ipset="{{ subitem.1.ipset }}"
     {% endif %}
   />
   {% endif %}
   {% endfor %}
   {% endif %}
 
-  {% if item.value.services is defined %}
-  {% for service in item.value.services %}
-  {% if item.value.services[service].state == "enabled" %}
-  <service name="{{ item.value.services[service].name }}"/>
+  {% if item.1.services is defined %}
+  {% for service in item.1.services | dictsort %}
+  {% if service.1.state == "enabled" %}
+  <service name="{{ service.1.name }}"/>
   {% endif %}
   {% endfor %}
   {% endif %}
 
-  {% if item.value.ports is defined %}
-  {% for port in item.value.ports %}
-  {% if item.value.ports[port].state == "enabled" %}
-  <port protocol="{{ item.value.ports[port].protocol }}" port="{{ item.value.ports[port].port }}"/>
+  {% if item.1.ports is defined %}
+  {% for port in item.1.ports | dictsort %}
+  {% if port.1.state == "enabled" %}
+  <port protocol="{{ port.1.protocol }}" port="{{ port.1.port }}"/>
   {% endif %}
   {% endfor %}
   {% endif %}
 
-  {% if item.value.protocols is defined %}
-  {% for subitem in item.value.protocols %}
-  {% if item.value.protocols[subitem].state == "enabled" %}
-  <protocol value="{{ item.value.protocols[subitem].value }}"/>
+  {% if item.1.protocols is defined %}
+  {% for subitem in item.1.protocols | dictsort %}
+  {% if subitem.1.state == "enabled" %}
+  <protocol value="{{ subitem.1.value }}"/>
   {% endif %}
   {% endfor %}
   {% endif %}
 
-  {% if item.value.icmp_blocks is defined %}
-  {% for subitem in item.value.icmp_blocks %}
-  {% if item.value.icmp_blocks[subitem].state == "enabled" %}
-  <icmp-block name="{{ item.value.icmp_blocks[subitem].name }}"/>
+  {% if item.1.icmp_blocks is defined %}
+  {% for subitem in item.1.icmp_blocks | dictsort %}
+  {% if subitem.1.state == "enabled" %}
+  <icmp-block name="{{ subitem.1.name }}"/>
   {% endif %}
   {% endfor %}
   {% endif %}
 
-  {% if item.value.icmp_block_inversion is defined %}
-  {% if item.value.icmp_block_inversion == "enabled" %}
+  {% if item.1.icmp_block_inversion is defined %}
+  {% if item.1.icmp_block_inversion == "enabled" %}
   <icmp-block-inversion/>
   {% endif %}
   {% endif %}
 
-  {% if item.value.masquerade is defined %}
-  {% if item.value.masquerade == "enabled" %}
+  {% if item.1.masquerade is defined %}
+  {% if item.1.masquerade == "enabled" %}
   <masquerade/>
   {% endif %}
   {% endif %}
 
-  {% if item.value.forward_ports is defined %}
-  {% for subitem in item.value.forward_ports %}
-  {% if item.value.forward_ports[subitem].state == "enabled" %}
-  <forward-port
-    port="{{ item.value.forward_ports[subitem].port }}"
-    protocol="{{ item.value.forward_ports[subitem].protocol }}"
-    {% if item.value.forward_ports[subitem].to_port is defined %}
-    to-port="{{ item.value.forward_ports[subitem].to_port }}"
+  {% if item.1.forward_ports is defined %}
+  {% for subitem in item.1.forward_ports | dictsort %}
+  {% if subitem.1.state == "enabled" %}
+  <forward_ports
+    port="{{ subitem.1.port }}"
+    protocol="{{ subitem.1.protocol }}"
+    {% if subitem.1.to_port is defined %}
+    to-port="{{ subitem.1.to_port }}"
     {% endif %}
-    {% if item.value.forward_ports[subitem].to_addr is defined %}
-    to-addr="{{ item.value.forward_ports[subitem].to_addr }}"
+    {% if subitem.1.to_addr is defined %}
+    to-addr="{{ subitem.1.to_addr }}"
     {% endif %}
   />
   {% endif %}
   {% endfor %}
   {% endif %}
 
-  {% if item.value.source_ports is defined %}
-  {% for subitem in item.value.source_ports %}
-  {% if item.value.source_ports[subitem].state == "enabled" %}
+  {% if item.1.source_ports is defined %}
+  {% for subitem in item.1.source_ports | dictsort %}
+  {% if subitem.1.state == "enabled" %}
   <source-port
-    port="{{ item.value.source_ports[subitem].port }}"
-    protocol="{{ item.value.source_ports[subitem].protocol }}"
+    port="{{ subitem.1.port }}"
+    protocol="{{ subitem.1.protocol }}"
   />
   {% endif %}
   {% endfor %}
   {% endif %}
 
-  {% if item.value.rules is defined %}
-  {% for subitem in item.value.rules %}
-  {% if item.value.rules[subitem].state == "enabled" %}
-  {{ item.value.rules[subitem].value }}
+  {% if item.1.rules is defined %}
+  {% for subitem in item.1.rules | dictsort %}
+  {% if subitem.1.state == "enabled" %}
+  {{ subitem.1.value }}
   {% endif %}
   {% endfor %}
   {% endif %}

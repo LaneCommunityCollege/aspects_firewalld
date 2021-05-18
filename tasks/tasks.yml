@@ -1,21 +1,21 @@
 ---
 - name: "template zone files"
-  when: item.value.state == "present"
+  when: item.1.state == "present"
   template:
     src: "etc-firewalld-zones-zone.xml.j2"
-    dest: "/etc/firewalld/zones/{{ item.value.key }}.xml"
-  loop: "{{ aspects_firewalld_zones|dict2items }}"
+    dest: "/etc/firewalld/zones/{{ item.1.key }}.xml"
+  loop: "{{ aspects_firewalld_zones | dictsort }}"
   notify: restart firewalld
   tags:
   - aspects_firewalld
   - aspects_firewalld_template_tasks
 
 - name: "remove unwanted zone files."
-  when: item.value.state == "absent"
+  when: item.1.state == "absent"
   file:
     state: "absent"
-    name: "/etc/firewalld/zones/{{ item.value.key }}.xml"
-  loop: "{{ aspects_firewalld_zones|dict2items }}"
+    name: "/etc/firewalld/zones/{{ item.1.key }}.xml"
+  loop: "{{ aspects_firewalld_zones | dictsort }}"
   notify: restart firewalld
   tags:
   - aspects_firewalld
