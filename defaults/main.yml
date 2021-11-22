@@ -4,11 +4,9 @@ aspects_packages_packages:
   firewalld:
     state: "present"
     Ubuntu:
-      1604: "firewalld"
       1804: "firewalld"
       2004: "firewalld"
     Debian:
-      9: "firewalld"
       10: "firewalld"
     CentOS:
       7: "firewalld"

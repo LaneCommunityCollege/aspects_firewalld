@@ -4,7 +4,7 @@ galaxy_info:
   description: Install or remove firewalld and configure firewalld zones.
   company: Lane Community College
   license: MIT
-  min_ansible_version: 2.8
+  min_ansible_version: 2.9
   platforms:
   - name: CentOS
     versions:
@@ -14,12 +14,10 @@ galaxy_info:
     - 7
   - name: Ubuntu
     versions:
-    - xenial
     - bionic
     - focal
   - name: Debian
     versions:
-    - stretch
     - buster
   categories:
   - system
