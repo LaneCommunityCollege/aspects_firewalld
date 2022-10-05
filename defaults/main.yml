@@ -6,6 +6,7 @@ aspects_packages_packages:
     Ubuntu:
       1804: "firewalld"
       2004: "firewalld"
+      2204: "firewalld"
     Debian:
       10: "firewalld"
     CentOS:
