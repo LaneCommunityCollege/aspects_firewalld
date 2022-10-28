@@ -13,3 +13,5 @@ aspects_packages_packages:
       7: "firewalld"
     OracleLinux:
       7: "firewalld"
+      8: "firewalld"
+      9: "firewalld"
