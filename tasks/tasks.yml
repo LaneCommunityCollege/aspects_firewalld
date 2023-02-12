@@ -7,8 +7,17 @@
   loop: "{{ aspects_firewalld_zones | dictsort }}"
   notify: restart firewalld
   tags:
-  - aspects_firewalld
-  - aspects_firewalld_template_tasks
+    - aspects_firewalld
+    - aspects_firewalld_template_tasks
+
+- name: "template /etc/firewalld/firewalld/conf files"
+  template:
+    src: "etc-firewalld-firewalld.conf.j2"
+    dest: "/etc/firewalld/firewalld.conf"
+  notify: restart firewalld
+  tags:
+    - aspects_firewalld
+    - aspects_firewalld_template_tasks
 
 - name: "remove unwanted zone files."
   when: item.1.state == "absent"
@@ -18,5 +27,5 @@
   loop: "{{ aspects_firewalld_zones | dictsort }}"
   notify: restart firewalld
   tags:
-  - aspects_firewalld
-  - aspects_firewalld_template_tasks
+    - aspects_firewalld
+    - aspects_firewalld_template_tasks

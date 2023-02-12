@@ -1,0 +1,74 @@
+# firewalld config file
+
+# default zone
+# The default zone used if an empty zone string is used.
+# Default: public
+{% if aspects_firewalld_conf.DefaultZone.enabled %}DefaultZone={{ aspects_firewalld_conf.DefaultZone.value }}{% endif %}
+
+# Clean up on exit
+# If set to no or false the firewall configuration will not get cleaned up
+# on exit or stop of firewalld.
+# Default: yes
+{% if aspects_firewalld_conf.CleanupOnExit.enabled %}CleanupOnExit={{ aspects_firewalld_conf.CleanupOnExit.value }}{% endif %}
+
+# Clean up kernel modules on exit
+# If set to yes or true the firewall related kernel modules will be
+# unloaded on exit or stop of firewalld. This might attempt to unload
+# modules not originally loaded by firewalld.
+# Default: no
+{% if aspects_firewalld_conf.CleanupModulesOnExit.enabled %}CleanupModulesOnExit={{ aspects_firewalld_conf.CleanupModulesOnExit.value }}{% endif %}
+
+# Lockdown
+# If set to enabled, firewall changes with the D-Bus interface will be limited
+# to applications that are listed in the lockdown whitelist.
+# The lockdown whitelist file is lockdown-whitelist.xml
+# Default: no
+{% if aspects_firewalld_conf.Lockdown.enabled %}Lockdown={{ aspects_firewalld_conf.Lockdown.value }}{% endif %}
+
+# IPv6_rpfilter
+# Performs a reverse path filter test on a packet for IPv6. If a reply to the
+# packet would be sent via the same interface that the packet arrived on, the
+# packet will match and be accepted, otherwise dropped.
+# The rp_filter for IPv4 is controlled using sysctl.
+# Note: This feature has a performance impact. See man page FIREWALLD.CONF(5)
+# for details.
+# Default: yes
+{% if aspects_firewalld_conf.IPv6_rpfilter.enabled %}IPv6_rpfilter={{ aspects_firewalld_conf.IPv6_rpfilter.value }}{% endif %}
+
+# IndividualCalls
+# Do not use combined -restore calls, but individual calls. This increases the
+# time that is needed to apply changes and to start the daemon, but is good for
+# debugging.
+# Default: no
+{% if aspects_firewalld_conf.IndividualCalls.enabled %}IndividualCalls={{ aspects_firewalld_conf.IndividualCalls.value }}{% endif %}
+
+# LogDenied
+# Add logging rules right before reject and drop rules in the INPUT, FORWARD
+# and OUTPUT chains for the default rules and also final reject and drop rules
+# in zones. Possible values are: all, unicast, broadcast, multicast and off.
+# Default: off
+{% if aspects_firewalld_conf.LogDenied.enabled %}LogDenied={{ aspects_firewalld_conf.LogDenied.value }}{% endif %}
+
+# FirewallBackend
+# Selects the firewall backend implementation.
+# Choices are:
+#	- nftables (default)
+#	- iptables (iptables, ip6tables, ebtables and ipset)
+# Note: The iptables backend is deprecated. It will be removed in a future
+# release.
+{% if aspects_firewalld_conf.FirewallBackend.enabled %}FirewallBackend={{ aspects_firewalld_conf.FirewallBackend.value }}{% endif %}
+
+# FlushAllOnReload
+# Flush all runtime rules on a reload. In previous releases some runtime
+# configuration was retained during a reload, namely; interface to zone
+# assignment, and direct rules. This was confusing to users. To get the old
+# behavior set this to "no".
+# Default: yes
+{% if aspects_firewalld_conf.FlushAllOnReload.enabled %}FlushAllOnReload={{ aspects_firewalld_conf.FlushAllOnReload.value }}{% endif %}
+
+# RFC3964_IPv4
+# As per RFC 3964, filter IPv6 traffic with 6to4 destination addresses that
+# correspond to IPv4 addresses that should not be routed over the public
+# internet.
+# Defaults to "yes".
+{% if aspects_firewalld_conf.RFC3964_IPv4.enabled %}RFC3964_IPv4={{ aspects_firewalld_conf.RFC3964_IPv4.value }}{% endif %}

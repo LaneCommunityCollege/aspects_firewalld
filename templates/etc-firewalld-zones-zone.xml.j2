@@ -122,4 +122,9 @@
   {% endfor %}
   {% endif %}
 
+  {% if item.1.forward is defined %}
+  {% if item.1.forward %}
+  <forward/>
+  {% endif %}
+  {% endif %}
 </zone>

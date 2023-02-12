@@ -15,3 +15,35 @@ aspects_packages_packages:
       7: "firewalld"
       8: "firewalld"
       9: "firewalld"
+
+aspects_firewalld_conf:
+  DefaultZone:
+    enabled: True
+    value: public
+  CleanupOnExit:
+    enabled: True
+    value: yes
+  CleanupModulesOnExit:
+    enabled: True
+    value: no
+  Lockdown:
+    enabled: True
+    value: no
+  IPv6_rpfilter:
+    enabled: True
+    value: yes
+  IndividualCalls:
+    enabled: True
+    value: no
+  LogDenied:
+    enabled: True
+    value: off
+  FirewallBackend:
+    enabled: True
+    value: nftables
+  FlushAllOnReload:
+    enabled: True
+    value: yes
+  RFC3964_IPv4:
+    enabled: True
+    value: yes
