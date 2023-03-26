@@ -19,31 +19,31 @@ aspects_packages_packages:
 aspects_firewalld_conf:
   DefaultZone:
     enabled: True
-    value: public
+    value: "public"
   CleanupOnExit:
     enabled: True
-    value: yes
+    value: "yes"
   CleanupModulesOnExit:
     enabled: True
-    value: no
+    value: "no"
   Lockdown:
     enabled: True
-    value: no
+    value: "no"
   IPv6_rpfilter:
     enabled: True
-    value: yes
+    value: "yes"
   IndividualCalls:
     enabled: True
-    value: no
+    value: "no"
   LogDenied:
     enabled: True
-    value: off
+    value: "off"
   FirewallBackend:
     enabled: True
-    value: nftables
+    value: "nftables"
   FlushAllOnReload:
     enabled: True
-    value: yes
+    value: "yes"
   RFC3964_IPv4:
     enabled: True
-    value: yes
+    value: "yes"
